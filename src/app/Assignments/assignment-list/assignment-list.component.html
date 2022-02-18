@@ -1,0 +1,60 @@
+<div>
+    <div class="form">
+        <button pButton type="button" label="משימה חדשה" icon="pi pi-plus" class="p-button-text"
+            routerLink='/Assignments/create'></button>
+        <div>
+            <p-table *ngIf="assignments.length" [value]="assignments" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>קוד משימה</th>
+                        <th>סוג המשימה</th>
+                        <th>שם המשימה</th>
+                        <th>תאור המשימה</th>
+                        <th>תחילת משימה</th>
+                        <th>סיום משימה</th>
+                        <th>משימה חוזרת?</th>
+                        <th>משימה הסתיימה?</th>
+                        <th>עדכון סטטוס</th>
+                        <th>מחיקת משימה</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-assignment>
+                    <tr>
+                        <td>{{assignment.id}}</td>
+                        <td>{{assignment.assignmentType}}</td>
+                        <td>{{assignment.assignmentName}}</td>
+                        <td>{{assignment.assignmentDescription}}</td>
+                        <td>{{assignment.startDate|date: 'MMMM yyyy/dd': "": "he"}}</td>
+                        <td>{{assignment.endDate|date: 'MMMM yyyy/dd': "": "he"||"אין מועד לסיום"}}</td>
+                        <td>
+                            <p-checkbox id="{{1+assignment.id}}" [binary]="true" value="assignment.isRepeated"
+                                [disabled]="true" [(ngModel)]="assignment.isRepeated">
+                            </p-checkbox>
+                        </td>
+                        <td>
+                            <p-checkbox id="{{2+assignment.id}}" [binary]="true" value="assignment.isDone"
+                                [(ngModel)]="assignment.isDone">
+                            </p-checkbox>
+                        </td>
+                        <td>
+                            <button pButton type="button" label="עדכון משימה" icon="pi pi-check" class="p-button-text"
+                                (click)="!assignment.IsDone &&setIsDone(assignment)"></button>
+                        </td>
+                        <td>
+                            <button pButton type="button" label="מחיקת משימה" icon="pi pi-trash"
+                                (click)="deleteAssignment(assignment)" class="p-button-text"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+            
+            <div *ngIf="assignments.length==0">
+                <p>לא נותרו משימות ....</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-toast></p-toast>

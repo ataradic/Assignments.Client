@@ -1,0 +1,19 @@
+.form{
+    width: fit-content;
+    margin: auto;
+    border: 2px solid blue;
+    border-radius: 10px;
+}
+
+.form-width{
+       display: flex;
+    flex-direction: column;
+    grid-gap: 2rem;
+    gap: 1rem;
+    align-items: self-start;
+    padding:4rem;
+}
+
+.close{
+    align-self: end;
+}

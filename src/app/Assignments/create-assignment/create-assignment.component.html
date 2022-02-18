@@ -1,0 +1,53 @@
+<div>
+    <div class="form">
+        <form [formGroup]="assignmentForm" class="form-width" (ngSubmit)="assignmentForm.valid && createAssignment()">
+            <button class="close" pButton type="button" icon="pi pi-times" iconPos="left" routerLink=''></button>
+            <label for="AssignmentName">שם משימה: </label>
+            <input id="AssignmentName" pInputText type="text" formControlName="AssignmentName">
+
+            <div class="invalid-feedback" *ngIf="
+            assignmentForm.controls['AssignmentName'].invalid &&
+            (assignmentForm.controls['AssignmentName'].dirty || assignmentForm.controls['AssignmentName'].touched)&&
+            assignmentForm.controls['AssignmentName'].hasError('required')">
+                השדה חובה
+            </div>
+
+
+
+            <label for="AssignmentDescription">תאור משימה: </label>
+            <input id="AssignmentDescription" pInputText="text" formControlName="AssignmentDescription">
+
+            <div class="invalid-feedback" *ngIf="
+                        assignmentForm.controls['AssignmentDescription'].invalid &&
+                        (assignmentForm.controls['AssignmentDescription'].dirty || assignmentForm.controls['AssignmentDescription'].touched)&&
+                        assignmentForm.controls['AssignmentDescription'].hasError('required')">
+                השדה חובה
+            </div>
+
+            <label for="StartDate">תחילת משימה: </label>
+            <p-calendar id="StartDate" [showIcon]="true" inputId="icon" [showButtonBar]="true"
+                formControlName="StartDate"></p-calendar>
+            <div class="invalid-feedback" *ngIf="
+             assignmentForm.controls['StartDate'].invalid &&
+             (assignmentForm.controls['StartDate'].dirty || assignmentForm.controls['StartDate'].touched)&&
+             assignmentForm.controls['StartDate'].hasError('required')">
+                השדה חובה
+            </div>
+
+            <label for="EndDate">סוף משימה: </label>
+            <p-calendar id="EndDate" [showIcon]="true" inputId="icon" [showButtonBar]="true" formControlName="EndDate">
+            </p-calendar>
+
+            <label for="IsRepeated">משימה חוזרת: </label>
+            <p-checkbox id="IsRepeated" value="true" formControlName="IsRepeated" [binary]="true"></p-checkbox>
+            
+
+            <label for="TypeId">סוג המשימה: </label>
+            <p-dropdown id="TypeId" [options]="types" formControlName="TypeId" optionLabel="name" optionValue="id">
+            </p-dropdown>
+            <div class="text-center">
+                <button pButton type="submit" [disabled]="!assignmentForm.valid" label="להוספה"></button>
+            </div>
+        </form>
+    </div>
+</div>
